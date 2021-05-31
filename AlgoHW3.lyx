@@ -198,6 +198,552 @@ False
 Q3:
 \end_layout
 
+\begin_layout Subsubsection*
+Algorithm:
+\end_layout
+
+\begin_layout Enumerate
+Define 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+w'
+\end_layout
+
+\end_inset
+
+- a new weight function, as 
+\begin_inset Formula $w'(e)=mod_{3}(w(e))$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Execute the Bellman-Ford algorithm on graph 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+G
+\end_layout
+
+\end_inset
+
+ and weight function 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+w'
+\end_layout
+
+\end_inset
+
+ and vertex 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+S
+\end_layout
+
+\end_inset
+
+.
+ For each relaxation update a 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+lenght_by_original_w
+\end_layout
+
+\end_inset
+
+ field in vertex v - 
+\begin_inset Formula $v.lenght\_by\_original\_w=min\left\{ d_{s}(v),d_{s}(u)+w(u,v)\right\} $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+After 
+\begin_inset Formula $V$
+\end_inset
+
+ iterations, if 
+\begin_inset Formula $d_{s}(v)=0$
+\end_inset
+
+ return 
+\begin_inset Formula $\gamma_{s}(v)=v.lenght\_by\_original\_w$
+\end_inset
+
+ else, return 
+\begin_inset Formula $\infty$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Complexity:
+\end_layout
+
+\begin_layout Enumerate
+Change the weight of each edge - 
+\begin_inset Formula $O(E)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Execute the Bellman-Ford algorithm - 
+\begin_inset Formula $O(VE)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In conclusion, the time complexity is 
+\begin_inset Formula $O(VE)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Correctness:
+\end_layout
+
+\begin_layout Standard
+there's two properties that we need to prove.
+ 
+\end_layout
+
+\begin_layout Claim
+There is a path form 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+s
+\end_layout
+
+\end_inset
+
+ to 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+v
+\end_layout
+
+\end_inset
+
+ that is divisible by 3 
+\begin_inset Formula $\iff$
+\end_inset
+
+ The returned path 
+\begin_inset Formula $\gamma_{s}(v)$
+\end_inset
+
+ is in fact divisible by 3.
+\end_layout
+
+\begin_layout Proof
+let 
+\begin_inset Formula $w(e_{i})$
+\end_inset
+
+ be the weight of each edge on the path to 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+v
+\end_layout
+
+\end_inset
+
+.
+ then 
+\begin_inset Formula 
+\[
+mod_{3}\left(\sum_{e_{i}\in path}w\left(e_{i}\right)\right)=\sum_{e_{i}\in path}\left(mod_{3}\left(w(e_{i}\right)\right)=\sum_{e_{i}\in path}w'\left(e_{i}\right)=d_{s}(v)=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+which means that the shortest path from 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+s
+\end_layout
+
+\end_inset
+
+ to 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+v
+\end_layout
+
+\end_inset
+
+ with the weight function 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+w'
+\end_layout
+
+\end_inset
+
+ is equal to 0.
+ so at the end of step two 
+\begin_inset Formula $d_{s}(v)=0$
+\end_inset
+
+.
+ which means that the returned path 
+\begin_inset Formula $\gamma_{s}(v)$
+\end_inset
+
+ is in fact divisible by 3.
+\end_layout
+
+\begin_layout Claim
+Among the paths that are divisible by 3, 
+\begin_inset Formula $\gamma_{s}(v)$
+\end_inset
+
+ is the shortest of all.
+\end_layout
+
+\begin_layout Proof
+let assume in contradiction that there is a shorter path form 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+s
+\end_layout
+
+\end_inset
+
+ to 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+v
+\end_layout
+
+\end_inset
+
+ that is divisible by 3 with length 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+L
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+L
+\end_layout
+
+\end_inset
+
+ is divisible by 3 - 
+\begin_inset Formula $mod_{3}(L)=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+If path 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+L
+\end_layout
+
+\end_inset
+
+ comes before the returned path 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+P
+\end_layout
+
+\end_inset
+
+ - then in this case in the iteration that 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+L
+\end_layout
+
+\end_inset
+
+ reaches its end at 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+v
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset Formula $d_{s}(v)$
+\end_inset
+
+ is equal to 0 and 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+lenght_by_original_w
+\end_layout
+
+\end_inset
+
+ is equal to 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+L
+\end_layout
+
+\end_inset
+
+.
+ When 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+P
+\end_layout
+
+\end_inset
+
+ reaches the vertex 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+v
+\end_layout
+
+\end_inset
+
+, the value of 
+\begin_inset Formula $d_{s}(v)$
+\end_inset
+
+ remains 0, and the value of 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+lenght_by_original_w
+\end_layout
+
+\end_inset
+
+ is updated to be 
+\begin_inset Formula $min\left\{ P,L\right\} $
+\end_inset
+
+.
+ But the returned value of 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+lenght_by_original_w
+\end_layout
+
+\end_inset
+
+ is 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+P
+\end_layout
+
+\end_inset
+
+ - in contradiction to 
+\begin_inset Formula $L<P$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+If path 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+P
+\end_layout
+
+\end_inset
+
+ comes before the returned path 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+L
+\end_layout
+
+\end_inset
+
+ - the same concept as in the first case.
+\end_layout
+
+\begin_layout Standard
+In conclusion, because Bellman-Ford algorithm finds the shortest path between
+ two vertices with negative weights function (in our case because adding
+ two positive numbers can result in a lower outcome) we can detect if vertex
+ 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+s
+\end_layout
+
+\end_inset
+
+ has a path to 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+v
+\end_layout
+
+\end_inset
+
+ that can be divided by 3.
+ And by the fact that we always choosing the lower 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+lenght_by_original_w
+\end_layout
+
+\end_inset
+
+ we insuring that we are receiving the shortest path out from the viable
+ candidates.
+\end_layout
+
 \begin_layout Standard
 
 \end_layout
