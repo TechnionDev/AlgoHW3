@@ -99,7 +99,7 @@ theorems-std
 \begin_body
 
 \begin_layout Title
-Algo HW 2
+Algo HW 3
 \end_layout
 
 \begin_layout Standard
@@ -276,6 +276,13 @@ False
 
 \begin_layout Enumerate
 False
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -549,6 +556,174 @@ If we just look at
 \end_inset
 
  with no remainder.
+\end_layout
+
+\begin_layout Proof
+Q.E.D
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Question
+\end_layout
+
+\begin_layout Proof
+We'll prove in induction on the amount of edges in the path.
+ The node with the longest shortest path is with at most 
+\begin_inset Formula $\left|L\right|+\left|R\right|$
+\end_inset
+
+ edges because there are no negative weight cycles.
+\end_layout
+
+\begin_layout Proof
+The idea: each path can be divided into at most 
+\begin_inset Formula $\frac{\left|L\right|+\left|R\right|}{2}$
+\end_inset
+
+ pairs of edges with the first being in 
+\begin_inset Formula $E_{1}$
+\end_inset
+
+ and the second in 
+\begin_inset Formula $E_{2}$
+\end_inset
+
+ (optionally with an additional edge from 
+\begin_inset Formula $E_{1}$
+\end_inset
+
+ at the end).
+\end_layout
+
+\begin_layout Proof
+We'll prove for an even number of edges in the path.
+ For an odd number, we can add an extra edge to a dummy node in the 
+\begin_inset Formula $L$
+\end_inset
+
+ set, and use this dummy edge with the unpaired edge (that caused the path
+ to be of an odd number of edges).
+\end_layout
+
+\begin_layout Proof
+
+\series bold
+For a path with 
+\begin_inset Formula $0$
+\end_inset
+
+ edges
+\end_layout
+
+\begin_layout Proof
+Then no iterations needed.
+\end_layout
+
+\begin_layout Proof
+
+\series bold
+Let's assume that we got all the paths with 
+\begin_inset Formula $2k$
+\end_inset
+
+ edges (or less) until the 
+\begin_inset Formula $k$
+\end_inset
+
+th iteration
+\end_layout
+
+\begin_layout Proof
+For a shortest path with 
+\begin_inset Formula $2k+2$
+\end_inset
+
+ edges, the subpath which includes the first 
+\begin_inset Formula $2k$
+\end_inset
+
+ edges (which is also shortest because if it wasn't we could use the better
+ path to that node and concat the last two edges and get a shorter path),
+ was discovered already.
+\end_layout
+
+\begin_layout Proof
+The last two edges are from 
+\begin_inset Formula $L$
+\end_inset
+
+ to 
+\begin_inset Formula $R$
+\end_inset
+
+ and then from 
+\begin_inset Formula $R$
+\end_inset
+
+ to 
+\begin_inset Formula $L$
+\end_inset
+
+.
+ We'll call the last two nodes in the path 
+\begin_inset Formula $v,u$
+\end_inset
+
+ respectively.
+\end_layout
+
+\begin_layout Proof
+Since the given algorithm does 
+\begin_inset Formula $L\rightarrow R$
+\end_inset
+
+ first and then 
+\begin_inset Formula $R\rightarrow L$
+\end_inset
+
+, we'll find the shortest paths to 
+\begin_inset Formula $v$
+\end_inset
+
+ and 
+\begin_inset Formula $u$
+\end_inset
+
+ both because of the order in which they're updated.
+ Thus, until the 
+\begin_inset Formula $\left(k+1\right)$
+\end_inset
+
+th iteration, we got all the paths with at most 
+\begin_inset Formula $2k+2$
+\end_inset
+
+ edges.
+\end_layout
+
+\begin_layout Proof
+In conclusion, at most we have paths of 
+\begin_inset Formula $\left|L\right|+\left|R\right|-1$
+\end_inset
+
+ edges, so we'll get even the longest path until at most the iteration 
+\begin_inset Formula $\frac{\left|L\right|+\left|R\right|}{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Again, for an odd amount of edges, we'll use a dummy node which won't matter
+ due to extra iteration we have (also, during the proof, we explained that
+ we get all odd paths which are subpaths of even paths).
 \end_layout
 
 \begin_layout Proof
