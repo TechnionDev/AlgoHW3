@@ -4,7 +4,7 @@
 \begin_header
 \save_transient_properties true
 \origin unavailable
-\textclass extarticle
+\textclass amsart
 \begin_preamble
 \usepackage{xcolor}
 \pagecolor[rgb]{0.15,0.15,0.15} %black
@@ -14,7 +14,12 @@
 \definecolor{lbcolor}{rgb}{0.2,0.2,0.2}  
 \end_preamble
 \use_default_options true
+\begin_removed_modules
+theorems-ams
+\end_removed_modules
 \begin_modules
+eqs-within-sections
+figs-within-sections
 linguistics
 theorems-std
 \end_modules
@@ -75,8 +80,8 @@ theorems-std
 \bottommargin 1.5cm
 \secnumdepth 3
 \tocdepth 3
-\paragraph_separation indent
-\paragraph_indentation default
+\paragraph_separation skip
+\defskip smallskip
 \is_math_indent 0
 \math_numbering_side default
 \quotes_style english
@@ -143,23 +148,92 @@ Gur Telem - 206631848
 
 \end_layout
 
-\begin_layout Part*
-\begin_inset listings
-inline true
-status open
+\begin_layout Section
+Question
+\end_layout
+
+\begin_layout Standard
+The weights of the lightest paths to the nodes from 
+\begin_inset Formula $s$
+\end_inset
+
+ are
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="3cm">
+<column alignment="center" valignment="top" width="3cm">
+<row>
+<cell mroffset="5cm" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
 
 \begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula 
+\[
+w\left(s\rightarrow s\right)=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+w\left(s\rightarrow a\right)=-4
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+w\left(s\rightarrow b\right)=2
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+w\left(s\rightarrow c\right)=-1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+w\left(s\rightarrow d\right)=0
+\]
+
+\end_inset
+
 
 \end_layout
 
 \end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
 
-Q1:
-\end_layout
-
-\begin_layout Subparagraph
+\begin_layout Plain Layout
 \begin_inset Flex Structure Tree
-status open
+status collapsed
 
 \begin_layout Plain Layout
 [S[B[C[D[A]]]]]
@@ -170,12 +244,18 @@ status open
 
 \end_layout
 
-\begin_layout Part*
-Q2:
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout Enumerate
-False
+\begin_layout Section
+Question
 \end_layout
 
 \begin_layout Enumerate
@@ -183,7 +263,7 @@ True
 \end_layout
 
 \begin_layout Enumerate
-False
+True 
 \end_layout
 
 \begin_layout Enumerate
@@ -194,558 +274,285 @@ False
 False
 \end_layout
 
-\begin_layout Part*
-Q3:
-\end_layout
-
-\begin_layout Subsubsection*
-Algorithm:
-\end_layout
-
 \begin_layout Enumerate
-Define 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-w'
+False
 \end_layout
 
-\end_inset
-
-- a new weight function, as 
-\begin_inset Formula $w'(e)=mod_{3}(w(e))$
-\end_inset
-
-.
+\begin_layout Section
+Question
 \end_layout
 
-\begin_layout Enumerate
-Execute the Bellman-Ford algorithm on graph 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-G
+\begin_layout Proof
+We'll use Bellman-Ford on a modified graph.
 \end_layout
 
+\begin_layout Proof
+Let us modify the graph so there will be 3 
+\begin_inset Quotes eld
 \end_inset
 
- and weight function 
-\begin_inset listings
-inline true
-status open
+layers
+\begin_inset Quotes erd
+\end_inset
 
-\begin_layout Plain Layout
+ of the graph (3 copies of each node, each representing a different 
+\begin_inset Formula $\mod3$
+\end_inset
 
-w'
+ result).
 \end_layout
 
+\begin_layout Proof
+The directed graph 
+\begin_inset Formula $G'=\left(V',E'\right)$
 \end_inset
 
- and vertex 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-S
-\end_layout
-
-\end_inset
-
-.
- For each relaxation update a 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-lenght_by_original_w
-\end_layout
-
-\end_inset
-
- field in vertex v - 
-\begin_inset Formula $v.lenght\_by\_original\_w=min\left\{ d_{s}(v),d_{s}(u)+w(u,v)\right\} $
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-After 
-\begin_inset Formula $V$
-\end_inset
-
- iterations, if 
-\begin_inset Formula $d_{s}(v)=0$
-\end_inset
-
- return 
-\begin_inset Formula $\gamma_{s}(v)=v.lenght\_by\_original\_w$
-\end_inset
-
- else, return 
-\begin_inset Formula $\infty$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subsection*
-Complexity:
-\end_layout
-
-\begin_layout Enumerate
-Change the weight of each edge - 
-\begin_inset Formula $O(E)$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-Execute the Bellman-Ford algorithm - 
-\begin_inset Formula $O(VE)$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-In conclusion, the time complexity is 
-\begin_inset Formula $O(VE)$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subsection*
-Correctness:
-\end_layout
-
-\begin_layout Standard
-there's two properties that we need to prove.
+ s.t.
  
-\end_layout
-
-\begin_layout Claim
-There is a path form 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-s
-\end_layout
-
+\begin_inset Formula $V'=\left\{ v_{0},v_{1},v_{2}\mid v\in V\right\} $
 \end_inset
 
- to 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-v
-\end_layout
-
+ (note that does 
+\begin_inset Formula $s$
 \end_inset
 
- that is divisible by 3 
-\begin_inset Formula $\iff$
-\end_inset
-
- The returned path 
-\begin_inset Formula $\gamma_{s}(v)$
-\end_inset
-
- is in fact divisible by 3.
+ we don't need duplicates but it won't hurt).
 \end_layout
 
 \begin_layout Proof
-let 
-\begin_inset Formula $w(e_{i})$
+For each edge 
+\begin_inset Formula $\left(u,v\right)\in E$
 \end_inset
 
- be the weight of each edge on the path to 
-\begin_inset listings
-inline true
-status open
+ with weight 
+\begin_inset Formula $w\left(\left(u,v\right)\right)\mod3=m$
+\end_inset
 
-\begin_layout Plain Layout
-
-v
-\end_layout
-
+, then 
+\begin_inset Formula $\left(u_{0},v_{m}\right),\left(u_{1},v_{\left(1+m\right)\mod3}\right),\left(u_{2},v_{\left(2+m\right)\mod3}\right)\in E'$
 \end_inset
 
 .
- then 
-\begin_inset Formula 
-\[
-mod_{3}\left(\sum_{e_{i}\in path}w\left(e_{i}\right)\right)=\sum_{e_{i}\in path}\left(mod_{3}\left(w(e_{i}\right)\right)=\sum_{e_{i}\in path}w'\left(e_{i}\right)=d_{s}(v)=0
-\]
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Proof
-which means that the shortest path from 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-s
-\end_layout
-
+We'll also expand the definition of 
+\begin_inset Formula $w$
 \end_inset
 
- to 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-v
-\end_layout
-
-\end_inset
-
- with the weight function 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-w'
-\end_layout
-
-\end_inset
-
- is equal to 0.
- so at the end of step two 
-\begin_inset Formula $d_{s}(v)=0$
-\end_inset
-
-.
- which means that the returned path 
-\begin_inset Formula $\gamma_{s}(v)$
-\end_inset
-
- is in fact divisible by 3.
-\end_layout
-
-\begin_layout Claim
-Among the paths that are divisible by 3, 
-\begin_inset Formula $\gamma_{s}(v)$
-\end_inset
-
- is the shortest of all.
-\end_layout
-
-\begin_layout Proof
-let assume in contradiction that there is a shorter path form 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-s
-\end_layout
-
-\end_inset
-
- to 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-v
-\end_layout
-
-\end_inset
-
- that is divisible by 3 with length 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-L
-\end_layout
-
-\end_inset
-
-, 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-L
-\end_layout
-
-\end_inset
-
- is divisible by 3 - 
-\begin_inset Formula $mod_{3}(L)=0$
-\end_inset
-
-.
+ s.t.
  
+\begin_inset Formula $w\left(\left(u_{j},v_{i}\right)\right)=w\left(\left(u,v\right)\right)$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Proof
-If path 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-L
-\end_layout
-
+We got 
+\begin_inset Formula $\left|E'\right|=3\left|E\right|$
 \end_inset
 
- comes before the returned path 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-P
-\end_layout
-
-\end_inset
-
- - then in this case in the iteration that 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-L
-\end_layout
-
-\end_inset
-
- reaches its end at 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-v
-\end_layout
-
-\end_inset
-
-, 
-\begin_inset Formula $d_{s}(v)$
-\end_inset
-
- is equal to 0 and 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-lenght_by_original_w
-\end_layout
-
-\end_inset
-
- is equal to 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-L
-\end_layout
-
+ and 
+\begin_inset Formula $\left|V'\right|=3\left|V\right|$
 \end_inset
 
 .
- When 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-P
 \end_layout
 
+\begin_layout Proof
+Before we run the Bellman-Ford, let us prove that if we go from 
+\begin_inset Formula $s_{0}$
 \end_inset
 
- reaches the vertex 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-v
-\end_layout
-
+ (
+\begin_inset Formula $s_{1},s_{2}$
 \end_inset
 
-, the value of 
-\begin_inset Formula $d_{s}(v)$
+ are unreachable) in a certain path and end up in node 
+\begin_inset Formula $v_{m}$
 \end_inset
 
- remains 0, and the value of 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-lenght_by_original_w
-\end_layout
-
+ (for 
+\begin_inset Formula $m\in\left\{ 0,1,2\right\} $
 \end_inset
 
- is updated to be 
-\begin_inset Formula $min\left\{ P,L\right\} $
+) then the total path's length modulu 
+\begin_inset Formula $3$
+\end_inset
+
+ was 
+\begin_inset Formula $m$
 \end_inset
 
 .
- But the returned value of 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-lenght_by_original_w
 \end_layout
 
+\begin_deeper
+\begin_layout Lemma
+Starting from 
+\begin_inset Formula $s_{0}$
+\end_inset
+
+.
+ The length of the path is 
+\begin_inset Formula $0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Let's assume we're in 
+\begin_inset Formula $u_{m}$
+\end_inset
+
+ and the total path length modulu 
+\begin_inset Formula $3$
 \end_inset
 
  is 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-P
-\end_layout
-
-\end_inset
-
- - in contradiction to 
-\begin_inset Formula $L<P$
+\begin_inset Formula $m$
 \end_inset
 
 .
+ We'll mark the length of the path as 
+\begin_inset Formula $l$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Now for an edge 
+\begin_inset Formula $\left(u_{m},v_{t}\right)\in E'$
+\end_inset
+
+ (for some 
+\begin_inset Formula $v$
+\end_inset
+
+), but from the definition of the graph (how defined its edges) 
+\begin_inset Formula $t=\left(m+w\left(\left(u,v\right)\right)\right)\mod3$
+\end_inset
+
+, meaning that continuing the path to 
+\begin_inset Formula $v_{t}$
+\end_inset
+
+ will give us a path of length 
+\begin_inset Formula $l+w\left(\left(u,v\right)\right)$
+\end_inset
+
+ and with 
+\begin_inset Formula $\mod3$
+\end_inset
+
+ we get 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ And that concludes the induction.
+\end_layout
+
+\end_deeper
+\begin_layout Proof
+Also, for a shortest path of length 
+\begin_inset Formula $l$
+\end_inset
+
+ from 
+\begin_inset Formula $s$
+\end_inset
+
+ to 
+\begin_inset Formula $u$
+\end_inset
+
+ in 
+\begin_inset Formula $G$
+\end_inset
+
+, the same path exists (using the marked edges we create) and it will necessaril
+y end in 
+\begin_inset Formula $u_{l\mod3}$
+\end_inset
+
+ from the lemma we just proved.
+\end_layout
+
+\begin_layout Proof
+So each path exists and ends in the correct node replica.
  
 \end_layout
 
 \begin_layout Proof
-If path 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-P
-\end_layout
-
+And now let us run the Bellman-Ford starting from 
+\begin_inset Formula $s_{0}$
 \end_inset
 
- comes before the returned path 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-L
-\end_layout
-
+ in 
+\begin_inset Formula $G'$
 \end_inset
 
- - the same concept as in the first case.
+.
 \end_layout
 
-\begin_layout Standard
-In conclusion, because Bellman-Ford algorithm finds the shortest path between
- two vertices with negative weights function (in our case because adding
- two positive numbers can result in a lower outcome) we can detect if vertex
- 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-s
-\end_layout
-
+\begin_layout Proof
+For each node 
+\begin_inset Formula $v_{m}\in V'$
 \end_inset
 
- has a path to 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-v
-\end_layout
-
+, we now have the shortest path from 
+\begin_inset Formula $s_{0}$
 \end_inset
 
- that can be divided by 3.
- And by the fact that we always choosing the lower 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-lenght_by_original_w
-\end_layout
-
+ to 
+\begin_inset Formula $v_{m}$
 \end_inset
 
- we insuring that we are receiving the shortest path out from the viable
- candidates.
+, and because all of the paths from the original graph 
+\begin_inset Formula $G$
+\end_inset
+
+ exist in 
+\begin_inset Formula $G'$
+\end_inset
+
+, when the node 
+\begin_inset Formula $v_{m}$
+\end_inset
+
+ will not contain the shortest path of length with a remainder of 
+\begin_inset Formula $m$
+\end_inset
+
+ when divided by 
+\begin_inset Formula $3$
+\end_inset
+
+.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Proof
+If we just look at 
+\begin_inset Formula $v_{0}$
+\end_inset
 
+ (
+\begin_inset Formula $\forall v\in V$
+\end_inset
+
+) we get all the shortest paths with a length dividable by 
+\begin_inset Formula $3$
+\end_inset
+
+ with no remainder.
+\end_layout
+
+\begin_layout Proof
+Q.E.D
 \end_layout
 
 \end_body
